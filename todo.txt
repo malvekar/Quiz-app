@@ -1,2 +1,2 @@
 1) add relative path for logos and background images
-2) add a feature of getting data directly from excel sheet
+2) add an image of the app in readme
