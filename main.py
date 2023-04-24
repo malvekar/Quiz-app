@@ -1,6 +1,6 @@
 #Front end (placement of all buttons, background etc. Designed with the help of figma),  designed by Atmanand, 
 #Back end designed(binding all buttons, designing program and logic)  by Akarsh , akarshs.malvekar@gmail.com 
-
+import sqlite3
 import textwrap
 from pathlib import Path
 from random import randint
@@ -21,100 +21,22 @@ window = Tk()
 window.geometry("1920x1080")
 window.configure(bg = "#FFFFFF")
 
-#questions
-data = {
-    "CategoryAndHint": [
-        "Sci-Fi - Has characters called Marty McFly & Emmett “Doc” Brown",
-        "Tech - South Indian King",
-        "Miscellaneous - Management",
-        "Current Affairs - Original Name of an Island",
-        "Fintech - No Brainer",
-        "Logical Reasoning and Aptitude - Number Series",
-        "Audio engineering - Audio codec",
-        "CGI - Movies",
-        "Chemical - Nobel Prize",
-        "Space - The Solar System",
-        "Software - Worm",
-        "Automobile - Baby Steps",
-        "Biomedical - Imaging",
-        "Pure Science - Biology",
-        "Sci-Fi - Agent J and Agent K to action",
-        "Tech - OpenPOWER",
-        "Miscellaneous - History in Tech",
-        "Current Affairs - When Technology is accused of Racism",
-        "Fintech - Indian Village",
-        "Logical Reasoning and Aptitude - Solving a Crime",
-        "Audio engineering - R.I.P Freddie Mercury",
-        "CGI - Animation",
-        "Chemical - Principles of Chemistry",
-        "Space - Satellites of Earth",
-        "Software - Mind your language!",
-        "Automobile - Brand",
-        "Biomedical - 'They did SURGERY on a GRAPE!'",
-        "Pure Science - Microbiology"
-    ],
-    "question": [
-        "What kind of car is the time machine made from in Back To The Future?",
-        "This Indian King first time used the iron casted rockets in 1792 against the war with the British. Considered as the pioneer of rocket artillery, Identify the King.",
-        "Today, the 10th of November is celebrated as World Science Day for Peace and Development. This year’s theme for its celebration is a management principle for meeting human development goals while also preserving nature and its resources. What is the theme??",
-        "On 4th Sept 2015 an island in the state of Odisha was named after the late Indian President Dr APJ Abdul Kalam. What was the original name of the island?",
-        "In 1972 Abraham Bettinger coined a term in his book 'FINTECH: A series of 40 time shared Models Used at Manufacturers Hanover Trust Company'.What was the term?  ",
-        "Look at this series: 12, 11, 13, 12, 14, 13, … What number should come next?",
-        "What does mp3 stand for?",
-        "'CGI Is the Future', which movie was MOST important to the widespread use of CGI technology?",
-        "This German chemist who received the Nobel Prize is credited for a method which is used to synthesize ammonia from nitrogen gas and hydrogen gas. He weaponized chlorine during world war 1. Name the invention for which he got the Nobel prize.",
-        "Which planet is covered by clouds of sulphuric acid?",
-        "In 2022 people had been emailed with the words 'I Love You'.What is the name of the worm?",
-        "ABC of manual cars? ",
-        "What is the 'M' in MRI?",
-        "The camera shutter controls the amount of light entering the camera for image capture. What part of the human eye parallels this operation? ",
-        "What did they have to do in the first Men in Black movie? ",
-        "Full Form of FOSS ",
-        "The first text message was sent on 3 Dec 1992 after the development of SMS. Which country did this happen in?",
-        "Which technology company has dropped facial recognition software amid racial profiling concerns? ",
-        "From April 2015 to March 2017 police from 12 Indian states made a lot of journeys to this village. Nicknamed as the phishing capital of India, what is the name of the village?",
-        "A senior police officer asks his junior officers to visit a murder location and note everything they see there. Officers return with the information: Body lying, television on, a cup of tea on the table, newspaper opened with page numbers 7 and 8. Are officers lying? If yes Why? If no Why?",
-        "Which astronomer's name is part of the song 'Bohemian Rhapsody' ? ",
-        "The suit used to record human movements for creating animated movies is called ?",
-        "In the TV series, Breaking Bad, the fictional character of Walter White uses the alias ‘Heisenberg’, derived from the name of German Chemist, Werner Heisenberg. What is the principle formulated by Werner Heisenber regarding the position and velocity of an object? ",
-        "Orbits around Earth and provides a living area for astronauts to conduct tests and exploration.",
-        "___ contains text as well as information about the text.",
-        "Audi, Lamborghini, Bently and Porsche are owned by the same group of business. Which brand is it? ",
-        "They did a surgery on a grape. Name the minimally invasive surgical system responsible for the above 2018 meme.",
-        "Name of the virus which caused the COVID-19 pandemic."
-    ],
-    "answer": [
-        "Delorean",
-        "Tipu sultan",
-        "Sustainable Development",
-        "Wheeler island",
-        "Fintech",
-        "15",
-        "MPEG Audio Layer-3",
-        "Jurassic Park",
-        "Haber process",
-        "Venus",
-        "The love bug",
-        "Accelerator , Brake and Clutch",
-        "Magnetic",
-        "Iris",
-        "Catch a bug",
-        "Free and Open Source Software",
-        "United Kingdom",
-        "IBM",
-        "Jamtara",
-        "Yes, even page number on left, odd number on right",
-        "Galileo Galilei",
-        "MoCap Suit",
-        "Heisenberg’s Uncertainty Principle",
-        "space station",
-        "Markup language",
-        "Volkswagen",
-        "da Vinci Surgical System",
-        "SARS-CoV-2"
-    ]
-}
 
+# extracting the data from database and putting it in dictionary 
+conn = sqlite3.connect('data.db')
+c = conn.cursor()
+
+c.execute('SELECT category, question, answer FROM Table1')
+
+rows = c.fetchall()
+
+data = {'CategoryAndHint': [], 'question': [], 'answer': []}
+
+# Loop over the rows and append the values to the corresponding list in the dictionary
+for row in rows:
+    data['CategoryAndHint'].append(row[0])
+    data['question'].append(row[1])
+    data['answer'].append(row[2])
 
 
 
