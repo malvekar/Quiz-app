@@ -119,19 +119,19 @@ data = {
 
 
 #String variable 
-Q_N =0
+Q_N =0 # Question number
 Q = StringVar()
 A = StringVar()
 C_H = StringVar()
 R_T = StringVar()
 Current_Q = StringVar()
 #These flags are meant to restrict the flow in only one direction, eg:- the answer will be only revealed when the question is displayed 
-#hint, question and answer flag
+#Category, Question and Answer flag
 c_flag, q_flag, a_flag = 0, 0, 0
 displayed_questions = [] #to keep tack of displayed questions 
 
 
-
+# To pick up questions randomly without repeating 
 def pick_question_number():
     global displayed_questions
     flag = True
@@ -160,11 +160,13 @@ def next_category():
     global Q_N, C_H, c_flag, Current_Q, displayed_questions
     print('question number', Q_N)
     
-
+    # next category will be displayed only if the question and answer is displayed 
     if c_flag==a_flag:
         Current_Q.set('Q'+str(len(displayed_questions)+1))
         Q_N = pick_question_number()
         cat_hin = data['CategoryAndHint'][Q_N]
+        
+        #The length was selected using trial and error method
         if len(cat_hin) > 65:
             cat_hin = str_fltr(cat_hin, 65)
             
@@ -191,6 +193,8 @@ def next_category():
             height=99.0
         )
         c_flag += 1
+
+        #the following functions removes the previous question and answer from the boxes
         reveal_question(True)
         reveal_answer(True)
 
@@ -200,10 +204,11 @@ def reveal_question(destroy=False):
     global Q_N, Q, q_flag
     question = data['question'][Q_N]
 
+    # The length was selected using trial and error method 
     if len(question) > 78:
         question = str_fltr(question, 78)
 
-
+    #To reset the question box
     if destroy==True:
         Q.set('')
 
@@ -236,6 +241,8 @@ def reveal_answer(destroy=False):
     global Q_N, A, a_flag
     font_size = 28
     answer = data['answer'][Q_N]
+
+    # The string length was selected using trial and error method
     if len(answer)>40:
         answer = str_fltr(answer, 50)
         print('more than 20')
@@ -243,6 +250,7 @@ def reveal_answer(destroy=False):
     print(answer)
     
     
+    #to reset the answer box
     if destroy==True:
         A.set('')
 
