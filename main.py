@@ -1,5 +1,5 @@
 # Front end (placement of all buttons, background etc. Designed with the help of figma),  designed by Atmanand(https://github.com/tu2-atmanand),
-# Back end designed(binding all buttons, designing program and logic)  by Akarsh , akarshs.malvekar@gmail.com
+# Back end designed(binding all buttons, designing program and logic)  by Akarsh(https://github.com/malvekar)
 
 import sqlite3
 import textwrap
@@ -70,9 +70,8 @@ def pick_question_number():
             exit()
     return N
 
+
 # prevents overflowing of strings outside the box
-
-
 def str_fltr(St, wid):
 
     b = textwrap.wrap(St, placeholder='\n', width=wid)
